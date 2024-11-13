@@ -1,19 +1,43 @@
 // ConsoleApplication2.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-//
-
 #include <iostream>
+#include <string>
+using namespace std;
 
-int main()
-{
-    std::cout << "Hello World!\n";
+int main() {
+    int* array = nullptr; //Array vacio
+    int tamany = 0;
+    int num;
+
+    while (1) {
+        cout << "Entra un numero: ";
+        cin >> num; //Analizo el numero que escribe el usuario
+
+        int* newArray = new int[tamany + 1]; //Creo un nuevo array con un espacio más
+
+        int i = 0;
+
+        while (i < tamany && array[i] < num) {//
+            newArray[i] = array[i];
+            i++;
+        }
+        newArray[i] = num;
+
+        for (int j = i; j < tamany; j++) {
+            newArray[j + 1] = array[j];
+        }
+        delete[] array; //Elimino el antiguo
+
+        array = newArray;
+        tamany++;
+
+        cout << "[";
+        for (int k = 0; k < tamany; k++) {
+            cout << array[k];
+            if (k < tamany - 1) cout << ", ";
+        }
+        cout << "]" << endl;
+    }
+    delete[] array;
+    return 0;
 }
 
-// Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
-// Depurar programa: F5 o menú Depurar > Iniciar depuración
-
-// Sugerencias para primeros pasos: 1. Use la ventana del Explorador de soluciones para agregar y administrar archivos
-//   2. Use la ventana de Team Explorer para conectar con el control de código fuente
-//   3. Use la ventana de salida para ver la salida de compilación y otros mensajes
-//   4. Use la ventana Lista de errores para ver los errores
-//   5. Vaya a Proyecto > Agregar nuevo elemento para crear nuevos archivos de código, o a Proyecto > Agregar elemento existente para agregar archivos de código existentes al proyecto
-//   6. En el futuro, para volver a abrir este proyecto, vaya a Archivo > Abrir > Proyecto y seleccione el archivo .sln
